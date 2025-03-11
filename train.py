@@ -15,8 +15,8 @@ gc.collect()
 torch.cuda.empty_cache()
 
 
-''' main script of BioGraphFuse'''
-parser = argparse.ArgumentParser(description="Parser for BioGraphFuse")
+''' main script of BioGraphFusion'''
+parser = argparse.ArgumentParser(description="Parser for BioGraphFusion")
 parser.add_argument('--data_path', type=str, default='data/Disease-Gene/DisGeNet_cv')
 parser.add_argument('--seed', type=int, default=
 1234)
