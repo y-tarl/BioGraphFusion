@@ -1,0 +1,7 @@
+disease_symptom_associations	0
+interacts_with	1
+gene_is_element_in_pathway	2
+contain	3
+disease_gene	4
+chemical_gene	5
+disease_drug_associations	6
