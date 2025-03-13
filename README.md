@@ -4,6 +4,10 @@ The code for the paper ["BioGraphFusion: Graph Knowledge Embedding for Biologica
 
 ## Introduction
 
+BioGraphFusion is a framework that combines Knowledge Embeddings (KE) and Graph Structure Propagation (GSP) to improve biomedical knowledge graph reasoning and completion. It constructs a knowledge graph from fact triples, such as Drug-Disease and Protein-Chemical relationships, and employs Global Biological Tensor Encoding to learn latent biological associations. This process uses Canonical Polyadic (CP) decomposition to create embedding matrices for entities and relations.
+
+The model then uses Query-Guided Subgraph Construction and Propagation to build a query-relevant subgraph, refining relationships and capturing context-specific semantics. The Scoring Integration module merges propagation results with globally-informed scores from KE, enhancing prediction accuracy and interpretability. By modeling both local interactions and global dependencies, BioGraphFusion advances biomedical graph reasoning. See the diagram below for an overview:
+
 ![Overall Diagram](./overall.png)
 
 ## Dependencies
