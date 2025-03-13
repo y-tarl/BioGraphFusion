@@ -76,8 +76,10 @@ if __name__ == '__main__':
     torch.cuda.set_device(opts.gpu)
     print('==> gpu:', opts.gpu)
     if dataset == 'DisGeNet_cv':
+        opts.max_BKG_triples = 15000
         DataLoader = DataLoader_DisGeNet
     elif dataset =='STITCH':
+        opts.max_BKG_triples = 10000
         DataLoader = DataLoader_STITCH
     elif dataset == 'UMLS':
         DataLoader = DataLoader_UMLS
