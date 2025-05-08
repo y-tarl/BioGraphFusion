@@ -50,7 +50,7 @@ parser.add_argument('--lossflag', default=True, help='Whether to use N3 regulari
 parser.add_argument('--Flag', default=True, help='Whether to use N3 regularizer')
 parser.add_argument('--reg', default=0.1, type=float, help="Regularization weight")
 parser.add_argument('--logFlag', default=True, help='Whether to write log')
-parser.add_argument('--lamda', default=0.8569, type=float, help="scores weight")
+parser.add_argument('--lamda', default=0.7, type=float, help="scores weight")
 args = parser.parse_args()
 
 if args.data_path == 'data/Disease-Gene/DisGeNet_cv':
