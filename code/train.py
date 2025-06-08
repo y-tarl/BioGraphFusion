@@ -17,7 +17,7 @@ torch.cuda.empty_cache()
 
 ''' main script of BioGraphFusion'''
 parser = argparse.ArgumentParser(description="Parser for BioGraphFusion")
-parser.add_argument('--data_path', type=str, default='./data/Disease-Gene/DisGeNet_cv')
+parser.add_argument('--data_path', type=str, default='../data/Disease-Gene/DisGeNet_cv')
 parser.add_argument('--seed', type=int, default=1234)
 parser.add_argument('--gpu', type=int, default=7)
 parser.add_argument('--topk', type=int, default=800)
@@ -52,9 +52,9 @@ parser.add_argument('--logFlag', default=True, help='Whether to write log')
 parser.add_argument('--Lambda', default=0.7, type=float, help="scores weight")
 args = parser.parse_args()
 
-if args.data_path == './data/Disease-Gene/DisGeNet_cv':
+if args.data_path == '../data/Disease-Gene/DisGeNet_cv':
     args.BKG_list= ['disease-drug.txt', 'chemical-gene.txt']
-elif args.data_path == './data/Protein-Chemical/STITCH':
+elif args.data_path == '../data/Protein-Chemical/STITCH':
     args.BKG_list = ['disease-gene.txt', 'disease-drug.txt']
 
 
@@ -134,15 +134,15 @@ if __name__ == '__main__':
 
 
     # check all output paths
-    checkPath('./results/')
-    checkPath(f'./results/{dataset}/')
+    checkPath('../results/')
+    checkPath(f'../results/{dataset}/')
     checkPath(f'{loader.task_dir}/saveModel/')
 
 
     model = BaseModel(opts, loader)
 
 
-    opts.perf_file = f'results/{dataset}/{model.modelName}.txt'
+    opts.perf_file = f'../results/{dataset}/{model.modelName}.txt'
     print(f'==> perf_file: {opts.perf_file}')
 
     config_str = '%.4f, %.4f, %.6f,  %d, %d, %d, %d, %.4f,%s,%d,%d,%d,%.4f,%.4f,%.4f\n' % (
