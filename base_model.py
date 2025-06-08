@@ -11,8 +11,6 @@ from models import GNNModel
 from utils import *
 from tqdm import tqdm
 from torch.cuda.amp import GradScaler, autocast
-# import networkx as nx
-# import matplotlib.pyplot as plt
 
 # Initialize the gradient scaler
 scaler = GradScaler()
@@ -21,7 +19,6 @@ scaler = GradScaler()
 class BaseModel(object):
     def __init__(self, args, loader):
         self.model = GNNModel(args, loader)
-        # self.model = torch.nn.DataParallel(self.model, device_ids=[0, 1])
         self.model.cuda()
         self.loader = loader
         self.n_ent = loader.n_ent
@@ -35,7 +32,6 @@ class BaseModel(object):
         self.args = args
         if args.optimizer == 'Adam':
             self.optimizer = Adam(self.model.parameters(), lr=args.lr, weight_decay=args.lamb)
-            # self.optimizer = SparseAdam(self.model.parameters(), lr=args.lr)
         else :
             self.optimizer = optim.Adagrad(self.model.parameters(), lr=args.lr, weight_decay=args.lamb)
 
@@ -83,13 +79,9 @@ class BaseModel(object):
             extra_layers = self.model.gnn_layers[layers:]
             self.model.gnn_layers = self.model.gnn_layers[:layers]
             self.model.load_state_dict(checkpoint['model_state_dict'])
-            # self.model.load_state_dict(model_state_dict)
-            # self.model.load_state_dict(checkpoint['model_state_dict'],strict=False)
             self.model.gnn_layers += extra_layers
         else:
             self.model.load_state_dict(checkpoint['model_state_dict'])
-            # self.model.load_state_dict(checkpoint['model_state_dict'], strict=False)
-            # self.model.load_state_dict(model_state_dict)
             try:
                 self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
             except ValueError as e:

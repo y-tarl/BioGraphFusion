@@ -6,7 +6,6 @@ import time
 import numpy as np
 from torch_scatter import scatter
 from collections import defaultdict
-# from Refinement import Refinement
 from relation_refinement import Refinement,N3
 import os
 import networkx as nx
@@ -156,7 +155,7 @@ class GNNModel(torch.nn.Module):
             reg              = params.reg
             self.regularizer = N3(reg)
         self.rela_embed = Refinement((params.n_ent, 2 * self.n_rel + 1), params.hidden_dim, params.rdim, 'LSTMCell',
-                                 params.init)
+                                 params.init) 
         self.pre_embed=  self.rela_embed.lhs.weight
 
 
@@ -174,10 +173,10 @@ class GNNModel(torch.nn.Module):
         self.gnn_layers = nn.ModuleList(self.gnn_layers)
         self.dropout = nn.Dropout(params.dropout)
         self.W_final = nn.Linear(self.hidden_dim, 1, bias=False).cuda()
-        self.lamda=params.lamda
+        self.Lambda=params.Lambda
         if (params.gate == 'GRU'):
             self.gate = nn.GRU(self.hidden_dim, self.hidden_dim).cuda()
-        else:
+        elif (params.gate == 'LSTM'): 
             self.gate = nn.LSTM(self.hidden_dim, self.hidden_dim)
 
     def updateTopkNums(self, topk_list):
@@ -194,7 +193,7 @@ class GNNModel(torch.nn.Module):
 
 
 
-    def forward(self, subs, rels, mode='train'):
+    def forward(self, subs, rels, mode='train', inference_path=False):
         n = len(subs)  # n == B (Batchsize)
         q_sub = torch.LongTensor(subs).cuda()  # [B]
         q_rel = torch.LongTensor(rels).cuda()  # [B]
@@ -244,7 +243,7 @@ class GNNModel(torch.nn.Module):
         # [K, 2] (batch_idx, node_idx) K is w.r.t. n_nodes
         scores = self.W_final(hidden).squeeze(-1)
 
-        scores = self.lamda * scores + (1 - self.lamda) * selected_scores_tensor
+        scores = self.Lambda * scores + (1 - self.Lambda) * selected_scores_tensor
 
         # non-visited entities.txt have 0 scores
         scores_all = torch.zeros((n, self.loader.n_ent)).cuda()

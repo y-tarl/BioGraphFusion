@@ -17,9 +17,8 @@ torch.cuda.empty_cache()
 
 ''' main script of BioGraphFusion'''
 parser = argparse.ArgumentParser(description="Parser for BioGraphFusion")
-parser.add_argument('--data_path', type=str, default='data/Disease-Gene/DisGeNet_cv')
-parser.add_argument('--seed', type=int, default=
-1234)
+parser.add_argument('--data_path', type=str, default='./data/Disease-Gene/DisGeNet_cv')
+parser.add_argument('--seed', type=int, default=1234)
 parser.add_argument('--gpu', type=int, default=7)
 parser.add_argument('--topk', type=int, default=800)
 parser.add_argument('--layers', type=int, default=6)
@@ -33,7 +32,7 @@ parser.add_argument('--HPO', action='store_true')
 parser.add_argument('--eval_with_node_usage', action='store_true')
 parser.add_argument('--scheduler', type=str, default='exp')
 parser.add_argument('--remove_1hop_edges', action='store_true')
-parser.add_argument('--fact_ratio', type=float, default=0.92)#0.9  剩下0.1用作真正的train
+parser.add_argument('--fact_ratio', type=float, default=0.92)
 parser.add_argument('--epoch', type=int, default=100)
 parser.add_argument('--eval_interval', type=int, default=1)
 
@@ -50,12 +49,12 @@ parser.add_argument('--lossflag', default=True, help='Whether to use N3 regulari
 parser.add_argument('--Flag', default=True, help='Whether to use N3 regularizer')
 parser.add_argument('--reg', default=0.1, type=float, help="Regularization weight")
 parser.add_argument('--logFlag', default=True, help='Whether to write log')
-parser.add_argument('--lamda', default=0.7, type=float, help="scores weight")
+parser.add_argument('--Lambda', default=0.7, type=float, help="scores weight")
 args = parser.parse_args()
 
-if args.data_path == 'data/Disease-Gene/DisGeNet_cv':
+if args.data_path == './data/Disease-Gene/DisGeNet_cv':
     args.BKG_list= ['disease-drug.txt', 'chemical-gene.txt']
-elif args.data_path == 'data/Protein-Chemical/STITCH':
+elif args.data_path == './data/Protein-Chemical/STITCH':
     args.BKG_list = ['disease-gene.txt', 'disease-drug.txt']
 
 
@@ -75,15 +74,16 @@ if __name__ == '__main__':
 
     torch.cuda.set_device(opts.gpu)
     print('==> gpu:', opts.gpu)
+    print(dataset)
     if dataset == 'DisGeNet_cv':
         opts.max_BKG_triples = 15000
         DataLoader = DataLoader_DisGeNet
     elif dataset =='STITCH':
         opts.max_BKG_triples = 10000
         DataLoader = DataLoader_STITCH
-    elif dataset == 'UMLS':
+    elif dataset == 'umls':
         DataLoader = DataLoader_UMLS
-        
+
     loader = DataLoader(opts)
     opts.n_ent = loader.n_ent
     opts.n_rel = loader.n_rel
@@ -102,6 +102,7 @@ if __name__ == '__main__':
         opts.n_edge_topk = -1
         opts.n_layer = opts.layers
         opts.n_batch = opts.n_tbatch = 12
+
 
     elif dataset == 'STITCH':
         opts.lr = 0.0012
@@ -146,7 +147,7 @@ if __name__ == '__main__':
 
     config_str = '%.4f, %.4f, %.6f,  %d, %d, %d, %d, %.4f,%s,%d,%d,%d,%.4f,%.4f,%.4f\n' % (
     opts.lr, opts.decay_rate, opts.lamb, opts.hidden_dim, opts.attn_dim, opts.n_layer, opts.n_batch, opts.dropout,
-    opts.act, opts.topk, opts.rdim, opts.seed, opts.reg,opts.lamda,opts.fact_ratio)
+    opts.act, opts.topk, opts.rdim, opts.seed, opts.reg,opts.Lambda,opts.fact_ratio)
     print(config_str)
     if opts.logFlag:
         with open(opts.perf_file, 'a+') as f:
@@ -156,7 +157,7 @@ if __name__ == '__main__':
         model.loadModel(args.weight)
         model._update()
         model.model.updateTopkNums(opts.n_node_topk)
-        print(model.model.lamda)
+        print(model.model.Lambda)
 
     if opts.train:
         # training model
@@ -175,7 +176,7 @@ if __name__ == '__main__':
                     best_v_mrr = v_mrr
                     best_str = out_str
                     print(str(epoch) + '\t' + best_str)
-                    BestMetricStr = f'ValMRR_{str(v_mrr)[:5]}_TestMRR_{str(t_mrr)[:5]}'#模型文件名更改处2
+                    BestMetricStr = f'ValMRR_{str(v_mrr)[:5]}_TestMRR_{str(t_mrr)[:5]}'
                     model.saveModelToFiles(BestMetricStr, deleteLastFile=False)
         gc.collect()
         torch.cuda.empty_cache()

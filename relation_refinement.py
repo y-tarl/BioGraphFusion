@@ -51,3 +51,4 @@ class N3(torch.nn.Module):
         for f in factors:
             norm += self.weight * torch.sum(torch.abs(f) ** 3)
         return norm / factors[0].shape[0]
+
