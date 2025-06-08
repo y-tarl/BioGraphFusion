@@ -1,6 +1,6 @@
 # BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning
 
-This repository contains the official implementation of the paper **"BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning"** published in *Bioinformatics*.
+This repository contains the official implementation of the paper **"BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning"** submitted in *Bioinformatics*.
 
 ![Graphical Abstract](./GraphicalAbstract.jpg)
 
