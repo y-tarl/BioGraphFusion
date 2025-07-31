@@ -1,7 +1,8 @@
 # BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15869617.svg)](https://doi.org/10.5281/zenodo.15869617)
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.12.1-red.svg)](https://pytorch.org/)
+[![Official](https://img.shields.io/badge/Bioinformatics-Paper-blue.svg)](https://doi.org/10.1093/bioinformatics/btaf408)
+[![arXiv](https://img.shields.io/badge/arXiv-2507.14468-b31b1b.svg)](https://arxiv.org/abs/2507.14468)
 [![Code](https://img.shields.io/badge/Code-Available-Green.svg)](https://github.com/Y-TARL/BioGraphFusion)
 
 > This repository contains the official implementation of the paper **"BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning"** accepted by *Bioinformatics*.
@@ -230,8 +231,9 @@ If you find this work useful for your research, please cite our paper:
 ```bibtex
 @article{lin2025biographfusion,
   title={BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning},
-  author={Lin, Yitong and He, Jiaying and Chen, Jiahe and Zhu, Xinnan and Zheng, Jianwei and Bo, Tao},
+  author={Lin, Yitong and He, Jiaying and Chen, Jiahe and Zhu, Xinnan and Zheng, Jianwei and Tao, Bo},
   journal={Bioinformatics},
+  pages={btaf408},
   year={2025},
   publisher={Oxford University Press}
 }
