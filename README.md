@@ -4,7 +4,7 @@
 [![Official](https://img.shields.io/badge/Bioinformatics-Paper-blue.svg)](https://doi.org/10.1093/bioinformatics/btaf408)
 [![arXiv](https://img.shields.io/badge/arXiv-2507.14468-b31b1b.svg)](https://arxiv.org/abs/2507.14468)
 [![Code](https://img.shields.io/badge/Code-Available-Green.svg)](https://github.com/Y-TARL/BioGraphFusion)
-[![Dataset](https://img.shields.io/badge/Dataset-Available-Green.svg)](https://huggingface.co/datasets/Y-Tarl/BioGraphFusion)
+[![Dataset](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-sm.svg)](https://huggingface.co/datasets/Y-Tarl/BioGraphFusion)
 
 > This repository contains the official implementation of the paper **"BioGraphFusion: Graph Knowledge Embedding for Biological Completion and Reasoning"** accepted by *Bioinformatics*.
 
