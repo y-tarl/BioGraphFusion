@@ -69,19 +69,26 @@ The following dependencies are required:
    cd BioGraphFusion
    ```
 
-2. **Install all dependencies from `requirement.txt`:**
+2. **Create a conda virtual environment with Python 3.10:**
+
+   ```bash
+   conda create -n biographfusion python=3.10
+   conda activate biographfusion
+   ```
+
+3. **Install all dependencies from `requirement.txt`:**
 
    ```bash
    pip install -r requirement.txt
    ```
 
-3. **Navigate to the `code` directory:**
+4. **Navigate to the `code` directory:**
 
    ```bash
    cd code
    ```
 
-4. **Run the training script, for example:**
+5. **Run the training script, for example:**
 
    ```bash
    python3 train.py --data_path ../data/Disease-Gene/DisGeNet_cv --topk 800 --layers 6 --fact_ratio 0.92 --gpu 0
